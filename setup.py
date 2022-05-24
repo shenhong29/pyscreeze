@@ -28,7 +28,8 @@ setup(
     packages=["pyscreeze"],
     test_suite="tests",
     # NOTE: Update the python_version info for Pillow as Pillow supports later versions of Python.
-    install_requires=['Pillow >= 8.3.2; python_version == "3.8"',
+    install_requires=['Pillow >= 9.0; python_version == "3.9"',
+                      'Pillow >= 8.3.2; python_version == "3.8"',
                       'Pillow >= 8.3.2; python_version == "3.7"',
                       'Pillow >= 8.3.2; python_version == "3.6"',
                       'Pillow <= 7.2.0, >= 3.2.0; python_version == "3.5"',
@@ -58,5 +59,6 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
     ],
 )

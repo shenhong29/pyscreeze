@@ -1,7 +1,7 @@
 # PyScreeze - PyScreeze is a simple, cross-platform screenshot module for Python 2 and 3.
 # By Al Sweigart al@inventwithpython.com
 
-__version__ = '0.1.28'
+__version__ = '0.1.29'
 
 from math import sqrt
 import collections
@@ -19,8 +19,8 @@ try:
     from PIL import Image
     from PIL import ImageOps
     from PIL import ImageDraw
-    if sys.platform == 'win32': # TODO - Pillow now supports ImageGrab on macOS.
-        from PIL import ImageGrab
+    # if sys.platform == 'win32': # TODO - Pillow now supports ImageGrab on macOS.
+    from PIL import ImageGrab
     _PILLOW_UNAVAILABLE = False
 except ImportError:
     # We ignore this because failures due to Pillow not being installed
@@ -46,24 +46,15 @@ RUNNING_PYTHON_2 = sys.version_info[0] == 2
 if not RUNNING_PYTHON_2:
     unicode = str # On Python 3, all the isinstance(spam, (str, unicode)) calls will work the same as Python 2.
 
-if sys.platform == 'win32':
+# if sys.platform == 'win32':
     # On Windows, the monitor scaling can be set to something besides normal 100%.
     # PyScreeze and Pillow needs to account for this to make accurate screenshots.
     # TODO - How does macOS and Linux handle monitor scaling?
-    import ctypes
-    try:
-       ctypes.windll.user32.SetProcessDPIAware()
-    except AttributeError:
-        pass # Windows XP doesn't support monitor scaling, so just do nothing.
-
-    try:
-        import pygetwindow
-    except ImportError:
-        _PYGETWINDOW_UNAVAILABLE = True
-    else:
-        _PYGETWINDOW_UNAVAILABLE = False
-else:
-    _PYGETWINDOW_UNAVAILABLE = True
+import ctypes
+try:
+    ctypes.windll.user32.SetProcessDPIAware()
+except AttributeError:
+    pass # Windows XP doesn't support monitor scaling, so just do nothing.
 
 
 GRAYSCALE_DEFAULT = False
